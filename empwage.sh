@@ -34,7 +34,8 @@ do
 ((totalworkingdays++))
 empHours="$( workinghours $((RANDOM%3)) )"
 totalEmpHr=$((totalEmpHr+empHours))
-empdailywage[$totalworkingdays]="$( dailywagecal $empHours )"
+empdailywage["$totalworkingdays"]="$( dailywagecal $empHours )"
 done
 totalsalary="$( dailywagecal $totalEmpHours )"
 echo "Daily wage" ${empdailywage[@]}
+echo "All keys " ${!empdailywage[@]}
