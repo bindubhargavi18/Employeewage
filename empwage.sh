@@ -1,9 +1,12 @@
 #!/bin/bash -x
 fulltime=1
 randomcheck=$((RANDOM%2))
+wagePerHr=20
+empHrs=8
+
 if [ $fulltime -eq $randomcheck ]
 then
-	echo "Employee is present"
+	salary=$((wagePerHr*empHrs))
 else
-	echo "Employee is absent"
+	salary=0
 fi
