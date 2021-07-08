@@ -1,6 +1,6 @@
 #!/bin/bash -x
-fulltime=1
-parttime=2
+fulltime=2
+parttime=1
 wagePerHr=20
 daysPerMonth=20
 maxHrsinMonth=100
@@ -23,10 +23,18 @@ esac
 echo $empHrs
 }
 
+function dailywagecal
+{
+local empHours=$1
+wage=$((empHours*wagePerHr))
+echo $wage
+}
 while [[ $totalEmpHr -lt $maxHrsinMonth && $totalworkingdays -lt $daysPerMonth ]]
 do
 ((totalworkingdays++))
-empHrs="$( workinghours $((RANDOM%3)) )"
-totalEmpHr=$((totalEmpHr+empHrs))
+empHours="$( workinghours $((RANDOM%3)) )"
+totalEmpHr=$((totalEmpHr+empHours))
+empdailywage[$totalworkingdays]="$( dailywagecal $empHours )"
 done
-totalsalary=$((totalEmpHr*wagePerHr))
+totalsalary="$( dailywagecal $totalEmpHours )"
+echo "Daily wage" ${empdailywage[@]}
