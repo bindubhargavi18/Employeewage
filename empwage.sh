@@ -1,17 +1,15 @@
 #!/bin/bash -x
 fulltime=1
 parttime=2
-empcheck=$((RANDOM%3))
 wagePerHr=20
 daysPerMonth=20
 maxHrsinMonth=100
 totalEmpHr=0
 totalworkingdays=0
 
-while [[ $totalEmpHr -lt $maxHrsinMonth && $totalworkingdays -lt $daysPerMonth ]]
-do
-((totalworkingdays++))
-case $empcheck in
+function workinghours
+{
+case $1 in
 $fulltime)
 empHrs=8
 ;;
@@ -22,6 +20,13 @@ empHrs=8
 empHrs=0
 ;;
 esac
+echo $empHrs
+}
+
+while [[ $totalEmpHr -lt $maxHrsinMonth && $totalworkingdays -lt $daysPerMonth ]]
+do
+((totalworkingdays++))
+empHrs="$( workinghours $((RANDOM%3)) )"
 totalEmpHr=$((totalEmpHr+empHrs))
 done
 totalsalary=$((totalEmpHr*wagePerHr))
