@@ -4,25 +4,24 @@ parttime=2
 empcheck=$((RANDOM%3))
 wagePerHr=20
 daysPerMonth=20
+maxHrsinMonth=100
+totalEmpHr=0
+totalworkingdays=0
+
+while [[ $totalEmpHr -lt $maxHrsinMonth && $totalworkingdays -lt $daysPerMonth ]]
+do
+((totalworkingdays++))
 case $empcheck in
 $fulltime)
 empHrs=8
-salary=$((wagePerHr*empHrs))
-totalsalary=$((salary*daysPerMonth))
-echo "salary for month is $totalsalary"
 ;;
 $parttime)
 empHrs=8
-salary=$((wagePerHr*empHrs))
-totalsalary=$((salary*daysPerMonth))
-echo "salary of part time employee for month is $totalsalary"
 ;;
 *)
 empHrs=0
-salary=0
-echo "employee is absent"
 ;;
 esac
-
-
-
+totalEmpHr=$((totalEmpHr+empHrs))
+done
+totalsalary=$((totalEmpHr*wagePerHr))
